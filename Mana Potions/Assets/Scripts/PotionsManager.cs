@@ -13,13 +13,16 @@ public class PotionsManager : MonoBehaviour
     private List<Potion> currentPotions;
     private bool[] slotsAvailabilty;
 
+    public Potion selectedPotion;
+
     private Potion combineQueue = null;
 
-    public void CombinePotion(Potion pot)
+    public void CombinePotion()
     {
+
         if(combineQueue == null)
         {
-            combineQueue = pot;
+            combineQueue = this.selectedPotion;
         } 
         else
         {
@@ -30,7 +33,7 @@ public class PotionsManager : MonoBehaviour
 
                 Vector3 position = new Vector3(slot/5 * 10, 0, slot % 5 * 10);
                 GameObject newPotion = Instantiate(potionPrefab, position, Quaternion.identity) as GameObject;
-                newPotion.GetComponent<Potion>().Init(CombineColors(combineQueue.GetColor(), pot.GetColor()));
+                newPotion.GetComponent<Potion>().Init(CombineColors(combineQueue.GetColor(), this.selectedPotion.GetColor()));
 
                 slotsAvailabilty[slot] = false;
                 combineQueue = null;

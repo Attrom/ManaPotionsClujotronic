@@ -4,19 +4,27 @@ using UnityEngine;
 
 public class Clicker : MonoBehaviour
 {
-    
+
+    public GameObject potionOptions;
+
     private void Update()
     {
-        if (Input.GetMouseButtonUp(0))
+        if (Input.GetMouseButtonDown(0))
         {
             RaycastHit hit;
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
 
-            if (Physics.Raycast(ray, out hit, 100.0f))
+            LayerMask mask = LayerMask.GetMask("Potions");
+
+            if (Physics.Raycast(ray, out hit, 100.0f, mask))
             {
                 if (hit.transform != null)
                 {
-                    hit.transform.Find("OptionsPanel")
+                    potionOptions.SetActive(true);
+                    Potion potion = hit.transform.GetComponent("Potion") as Potion;
+
+                    Debug.Log(potion);
+                    PotionsManager.Instance.selectedPotion = potion;
                 }
             }
         }

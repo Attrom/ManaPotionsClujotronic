@@ -37,10 +37,6 @@ public class Potion : MonoBehaviour
         this.CalculateEffect();
     }
 
-    private void Combine()
-    {
-        PotionsManager.Instance.CombinePotion(this);
-    }
 
     //Locks access to special effect potions until the player loses smell sense
     public bool IsDrinkable()
