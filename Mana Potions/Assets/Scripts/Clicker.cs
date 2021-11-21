@@ -7,6 +7,9 @@ public class Clicker : MonoBehaviour
 
     public GameObject potionOptions;
 
+    public AudioSource openMenu;
+    public AudioSource pickPotion;
+
     private void Update()
     {
         if (Input.GetMouseButtonDown(0))
@@ -20,14 +23,22 @@ public class Clicker : MonoBehaviour
             {
                 if (hit.transform != null)
                 {
-                    potionOptions.SetActive(true);
+                    pickPotion.Play();
+                    Invoke("OpenMenu", 0.5f);
                     Potion potion = hit.transform.GetComponent("Potion") as Potion;
                     GameObject potionGameObject = hit.transform.gameObject;
-
+                    
                     PotionsManager.Instance.SetCurrentPotionObject(potionGameObject);
                     PotionsManager.Instance.SelectAPotion(potion);
                 }
             }
         }
+    }
+
+
+    private void OpenMenu()
+    {
+        potionOptions.SetActive(true);
+        openMenu.Play();
     }
 }

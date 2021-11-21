@@ -9,6 +9,8 @@ public class EffectsManager : MonoBehaviour
 
     public Text effectsList;
 
+    public Light light;
+
     public Camera mainCamera;
 
     private List<Effect.Effects> currentEffects = new List<Effect.Effects>();
@@ -64,52 +66,9 @@ public class EffectsManager : MonoBehaviour
 
         else if (effect == Effect.Effects.ShortLife || effect == Effect.Effects.OldView)
         {
-            Component c = mainCamera.GetComponent("Old Cinema Effect") as Component;
-            
-            
-        }
-        else if (effect == Effect.Effects.Zombify)
-        {
-
-        }
-        else if (effect == Effect.Effects.Zombify)
-        {
-
-        }
-        else if (effect == Effect.Effects.Zombify)
-        {
-
-        }
-        else if (effect == Effect.Effects.Zombify)
-        {
-
-        }
-        else if (effect == Effect.Effects.Zombify)
-        {
-
-        }
-        else if (effect == Effect.Effects.Zombify)
-        {
-
-        }
-        else if (effect == Effect.Effects.Zombify)
-        {
-
-        }
-        else if (effect == Effect.Effects.Zombify)
-        {
-
-        }
-        else if (effect == Effect.Effects.Zombify)
-        {
-
+            GameManager.Instance.GetOld();            
         }
 
-
-        else if ((short)effect % 2 == 1) //good
-        {
-
-        }
 
         else
         {
@@ -120,7 +79,7 @@ public class EffectsManager : MonoBehaviour
             }
             if(random == 1)
             {
-
+                light.intensity -= 0.05f;
             }
 
         }

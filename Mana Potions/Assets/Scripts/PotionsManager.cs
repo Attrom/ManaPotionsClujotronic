@@ -8,6 +8,8 @@ public class PotionsManager : MonoBehaviour
     public static PotionsManager Instance { get; private set; }
 
     public GameObject potionPrefab;
+    public GameObject potionPrefab2;
+    public GameObject potionPrefab3;
 
     private int currentNumberOfPotions = 5;
     private List<Potion> currentPotions;
@@ -16,6 +18,8 @@ public class PotionsManager : MonoBehaviour
     public AudioSource mix;
     public AudioSource goodPotion;
     public AudioSource badPotion;
+    public AudioSource burp1;
+    public AudioSource burp2;
 
     private Potion selectedPotion;
     private GameObject selectedPotionGameObject;
@@ -51,7 +55,7 @@ public class PotionsManager : MonoBehaviour
 
     public void Drink()
     {
-        Invoke("GetEffects", 4);
+        Invoke("GetEffects", 3);
     }
 
     private void GetEffects()
@@ -65,6 +69,21 @@ public class PotionsManager : MonoBehaviour
         else
         {
             badPotion.Play();
+        }
+        Invoke("Burp", 2);
+
+    }
+
+    private void Burp()
+    {
+        int i = Random.Range(0, 2);
+        if( i == 0)
+        {
+            burp1.Play();
+        }
+        else
+        {
+            burp2.Play();
         }
     }
 
@@ -90,7 +109,20 @@ public class PotionsManager : MonoBehaviour
 
 
                 Vector3 position = new Vector3(slot % 8 * 0.75f - 1.25f  - 0.1032f + 1.404f - 2.551f, 0.18f - 1.411f  - 0.098f + 3.009f, - (slot / 8 * 0.75f) - 2.055f + 4.552618f + 0.251f);
-                GameObject newPotion = Instantiate(potionPrefab, position, Quaternion.identity, gameObject.transform) as GameObject;
+                int i = Random.Range(0,3);
+                GameObject newPotion;
+                if (i == 0)
+                {
+                    newPotion = Instantiate(potionPrefab, position, Quaternion.identity, gameObject.transform) as GameObject;
+                }
+                else if(i == 1)
+                { 
+                    newPotion = Instantiate(potionPrefab2, position, Quaternion.identity, gameObject.transform) as GameObject;
+                }
+                else
+                {
+                    newPotion = Instantiate(potionPrefab3, position, Quaternion.identity, gameObject.transform) as GameObject;
+                }
                 newPotion.GetComponent<Potion>().Init(CombineColors(combineQueue.GetColor(), this.selectedPotion.GetColor()));
                 newPotion.GetComponent<Potion>().slot = slot;
 
