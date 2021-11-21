@@ -6,7 +6,6 @@ public class Potion : MonoBehaviour
     public Color color;
     private Effect effect;
 
-
     public Color GetColor()
     {
         return this.color;
@@ -57,6 +56,9 @@ public class Potion : MonoBehaviour
     private void Start()
     {
         this.CalculateEffect();
+        Transform liquid = this.gameObject.transform.GetChild(1);
+        liquid.GetComponent<Renderer>().material.color = this.color;
+
     }
 
 

@@ -9,9 +9,13 @@ public class PotionsManager : MonoBehaviour
 
     public GameObject potionPrefab;
 
-    private int currentNumberOfPotions;
+    private int currentNumberOfPotions = 5;
     private List<Potion> currentPotions;
-    private bool[] slotsAvailabilty;
+    private bool[] slotsAvailabilty = new bool[25];
+
+    public AudioSource mix;
+    public AudioSource goodPotion;
+    public AudioSource badPotion;
 
     private Potion selectedPotion;
 
@@ -24,6 +28,14 @@ public class PotionsManager : MonoBehaviour
         if (Instance == null)
         {
             Instance = this;
+            for (int i = 0; i < 5; i++)
+            {
+                slotsAvailabilty[i] = false;
+            }
+            for (int i = 5; i < 24; i++)
+            {
+                slotsAvailabilty[i] = true;
+            }
         }
         else
         {
@@ -38,7 +50,21 @@ public class PotionsManager : MonoBehaviour
 
     public void Drink()
     {
+        Invoke("GetEffects", 4);
+    }
+
+    private void GetEffects()
+    {
         EffectsManager.Instance.AddEffect(this.selectedPotion.GetEffect().effectName);
+
+        if (this.selectedPotion.GetEffect().greenComponent == Effect.Side.Good)
+        {
+            goodPotion.Play();
+        }
+        else
+        {
+            badPotion.Play();
+        }
     }
 
     public void CombinePotion()
@@ -54,10 +80,13 @@ public class PotionsManager : MonoBehaviour
             if ( slot >= 0)
             {
                 //play mixing animation and sound
+                mix.Play();
 
-                Vector3 position = new Vector3(slot/5 * 10, 0, slot % 5 * 10);
-                GameObject newPotion = Instantiate(potionPrefab, position, Quaternion.identity) as GameObject;
+
+                Vector3 position = new Vector3((slot-1) % 8 * 0.75f - 0.5f, 0.18f, slot / 8 * 0.75f);
+                GameObject newPotion = Instantiate(potionPrefab, new Vector3(0,0,0), Quaternion.identity, gameObject.transform) as GameObject;
                 newPotion.GetComponent<Potion>().Init(CombineColors(combineQueue.GetColor(), this.selectedPotion.GetColor()));
+                newPotion.transform.position = position;
 
                 slotsAvailabilty[slot] = false;
                 combineQueue = null;
@@ -67,7 +96,7 @@ public class PotionsManager : MonoBehaviour
 
     private int GetFirstAvailableSlot()
     {
-        for (int i = 0; i < 30 ; i++)
+        for (int i = 0; i < 25 ; i++)
         {
             if (this.slotsAvailabilty[i])
             {
