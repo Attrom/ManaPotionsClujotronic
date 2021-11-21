@@ -5,6 +5,8 @@ public class Potion : MonoBehaviour
 {
     public Color color;
     private Effect effect;
+    [SerializeField]
+    public int slot;
 
     public Color GetColor()
     {

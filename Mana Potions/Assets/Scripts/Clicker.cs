@@ -22,7 +22,9 @@ public class Clicker : MonoBehaviour
                 {
                     potionOptions.SetActive(true);
                     Potion potion = hit.transform.GetComponent("Potion") as Potion;
+                    GameObject potionGameObject = hit.transform.gameObject;
 
+                    PotionsManager.Instance.SetCurrentPotionObject(potionGameObject);
                     PotionsManager.Instance.SelectAPotion(potion);
                 }
             }
