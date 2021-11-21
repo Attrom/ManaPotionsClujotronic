@@ -9,6 +9,8 @@ public class EffectsManager : MonoBehaviour
 
     public Text effectsList;
 
+    public Camera mainCamera;
+
     private List<Effect.Effects> currentEffects = new List<Effect.Effects>();
 
     private void Awake()
@@ -43,6 +45,86 @@ public class EffectsManager : MonoBehaviour
         Debug.Log(effect);
         effectsList.text += '\n';
         effectsList.text += effect;
+
+        PerformEffect(effect);
+
+    }
+
+    private void PerformEffect(Effect.Effects effect)
+    {
+        if(effect == Effect.Effects.EternalYouthLife)
+        {
+            GameManager.Instance.Win();
+        }
+
+        else if(effect == Effect.Effects.Zombify)
+        {
+            GameManager.Instance.Lose();
+        }
+
+        else if (effect == Effect.Effects.ShortLife || effect == Effect.Effects.OldView)
+        {
+            Component c = mainCamera.GetComponent("Old Cinema Effect") as Component;
+            
+            
+        }
+        else if (effect == Effect.Effects.Zombify)
+        {
+
+        }
+        else if (effect == Effect.Effects.Zombify)
+        {
+
+        }
+        else if (effect == Effect.Effects.Zombify)
+        {
+
+        }
+        else if (effect == Effect.Effects.Zombify)
+        {
+
+        }
+        else if (effect == Effect.Effects.Zombify)
+        {
+
+        }
+        else if (effect == Effect.Effects.Zombify)
+        {
+
+        }
+        else if (effect == Effect.Effects.Zombify)
+        {
+
+        }
+        else if (effect == Effect.Effects.Zombify)
+        {
+
+        }
+        else if (effect == Effect.Effects.Zombify)
+        {
+
+        }
+
+
+        else if ((short)effect % 2 == 1) //good
+        {
+
+        }
+
+        else
+        {
+            int random = Random.Range(0, 3);
+            if(random == 0)
+            {
+                mainCamera.fieldOfView -= 1;
+            }
+            if(random == 1)
+            {
+
+            }
+
+        }
+
 
     }
 

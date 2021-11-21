@@ -89,7 +89,7 @@ public class PotionsManager : MonoBehaviour
                 mix.Play();
 
 
-                Vector3 position = new Vector3((slot-1) % 8 * 0.75f - 0.5f  - 0.1032f + 1.404f - 2.551f, 0.18f - 1.411f  - 0.098f + 3.009f, - (slot / 8 * 0.75f) - 2.055f + 4.552618f + 0.251f);
+                Vector3 position = new Vector3(slot % 8 * 0.75f - 1.25f  - 0.1032f + 1.404f - 2.551f, 0.18f - 1.411f  - 0.098f + 3.009f, - (slot / 8 * 0.75f) - 2.055f + 4.552618f + 0.251f);
                 GameObject newPotion = Instantiate(potionPrefab, position, Quaternion.identity, gameObject.transform) as GameObject;
                 newPotion.GetComponent<Potion>().Init(CombineColors(combineQueue.GetColor(), this.selectedPotion.GetColor()));
                 newPotion.GetComponent<Potion>().slot = slot;
@@ -104,7 +104,7 @@ public class PotionsManager : MonoBehaviour
     {
         this.slotsAvailabilty[this.selectedPotion.slot] = true;
         this.selectedPotionGameObject.GetComponent<AudioSource>().Play();
-        Destroy(this.selectedPotionGameObject,3.0f);
+        Destroy(this.selectedPotionGameObject,1.4f);
     }
 
     private int GetFirstAvailableSlot()

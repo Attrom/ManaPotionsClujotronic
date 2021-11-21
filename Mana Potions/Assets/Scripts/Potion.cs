@@ -26,7 +26,7 @@ public class Potion : MonoBehaviour
             target -= 1;
         }
 
-        short side = (short)Math.Floor(this.color.g * 8);        
+        short side = (short)Math.Floor(this.color.g * 8);
         if (this.color.g == 1)
         {
             side -= 1;

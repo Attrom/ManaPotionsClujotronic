@@ -79,7 +79,7 @@ public class Effect : Object
         SpecialHearingBad = 24,
         SpecialHearingGood = 25,
 
-        OtherWorldView = 26, //See spooky stuff
+        OldView = 26, //See spooky stuff
         JackpotView = 27, // All potions with effects that are either, Special, or Life related or Good, shine in a distinct glow
 
         SpecialSmellBad = 28,
