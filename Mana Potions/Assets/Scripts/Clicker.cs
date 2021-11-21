@@ -23,8 +23,7 @@ public class Clicker : MonoBehaviour
                     potionOptions.SetActive(true);
                     Potion potion = hit.transform.GetComponent("Potion") as Potion;
 
-                    Debug.Log(potion);
-                    PotionsManager.Instance.selectedPotion = potion;
+                    PotionsManager.Instance.SelectAPotion(potion);
                 }
             }
         }

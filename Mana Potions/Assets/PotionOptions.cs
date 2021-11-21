@@ -19,4 +19,9 @@ public class PotionOptions : MonoBehaviour
         }
     }
 
+    public void Hide()
+    {
+        gameObject.SetActive(false);
+    }
+
 }

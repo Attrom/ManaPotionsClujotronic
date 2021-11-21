@@ -13,9 +13,33 @@ public class PotionsManager : MonoBehaviour
     private List<Potion> currentPotions;
     private bool[] slotsAvailabilty;
 
-    public Potion selectedPotion;
+    private Potion selectedPotion;
 
     private Potion combineQueue = null;
+
+
+
+    private void Awake()
+    {
+        if (Instance == null)
+        {
+            Instance = this;
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
+    }
+
+    public void SelectAPotion(Potion pot)
+    {
+        this.selectedPotion = pot;
+    }
+
+    public void Drink()
+    {
+        EffectsManager.Instance.AddEffect(this.selectedPotion.GetEffect().effectName);
+    }
 
     public void CombinePotion()
     {

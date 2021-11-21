@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class Potion : MonoBehaviour
 {
-    private Color color;
+    public Color color;
     private Effect effect;
 
 
@@ -20,10 +20,27 @@ public class Potion : MonoBehaviour
     private void CalculateEffect()
     {
         short target = (short)Math.Floor(this.color.r * 6);
-        short side = (short)Math.Floor(this.color.g * 2);
+        if (this.color.r == 1)
+        {
+            target -= 1;
+        }
+
+        short side = (short)Math.Floor(this.color.g * 8);        
+        if (this.color.g == 1)
+        {
+            side -= 1;
+        }
+        side = (short)(side % 2);
+
         short type = (short)Math.Floor(this.color.b * 5);
+        if (this.color.b == 1)
+        {
+            type -= 1;
+        }
 
         short effectCode = (short)(type * 12 - 1 + (target + 1) * (side + 1));
+
+        this.effect = new Effect();
 
         this.effect.effectName = (Effect.Effects)effectCode;
         this.effect.redComponent = (Effect.Target)target;
@@ -34,6 +51,11 @@ public class Potion : MonoBehaviour
     internal void Init(Color color)
     {
         this.color = color;
+        this.CalculateEffect();
+    }
+
+    private void Start()
+    {
         this.CalculateEffect();
     }
 

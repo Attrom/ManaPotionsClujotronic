@@ -1,12 +1,15 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class EffectsManager : MonoBehaviour
 {
     public static EffectsManager Instance { get; private set; }
 
-    private List<Effect.Effects> currentEffects;
+    public Text effectsList;
+
+    private List<Effect.Effects> currentEffects = new List<Effect.Effects>();
 
     private void Awake()
     {
@@ -36,10 +39,11 @@ public class EffectsManager : MonoBehaviour
     /// <param name="effect"></param>
     public void AddEffect(Effect.Effects effect)
     {
-        if (!currentEffects.Contains(effect))
-        {
-            currentEffects.Add(effect);
-        }
+        currentEffects.Add(effect);
+        Debug.Log(effect);
+        effectsList.text += '\n';
+        effectsList.text += effect;
+
     }
 
 }
